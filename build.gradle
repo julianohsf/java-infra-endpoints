@@ -1,0 +1,16 @@
+group 'com.zoop'
+version '0.0.1-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'javax.servlet:javax.servlet-api:3.0.1'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
