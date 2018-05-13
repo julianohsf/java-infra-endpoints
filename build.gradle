@@ -14,3 +14,33 @@ dependencies {
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+jar {
+    baseName = 'infra-endpoints'
+    version = project.version
+}
+
+apply plugin: 'jacoco'
+
+compileJava.dependsOn clean
+test.finalizedBy jacocoTestReport
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.enabled true
+        html.destination = new File("${buildDir}/reports/jacoco")
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.9
+                counter = 'INSTRUCTIONS'
+            }
+        }
+    }
+}
