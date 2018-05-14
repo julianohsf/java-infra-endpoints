@@ -1,0 +1,6 @@
+Application-Name: test-application
+Created-By: Zoop Builder Tool
+Build-Jdk: 1.8.0_161
+Spring-Boot-Version: 2.0.2.RELEASE
+Implementation-Build: 20180512-7
+Implementation-Version: 1.0.0
