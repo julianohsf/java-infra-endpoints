@@ -26,6 +26,7 @@ jar {
 apply plugin: 'jacoco'
 
 compileJava.dependsOn clean
+build.dependsOn test
 test.finalizedBy jacocoTestReport
 
 jacocoTestReport {

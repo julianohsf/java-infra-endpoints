@@ -39,6 +39,20 @@ public class HealthTests {
     }
 
     @Test
+    public void testWithMultipleSuccesses() {
+        List<Dependency> dependencies = Arrays.asList(success, success);
+        Health health = new Health(dependencies);
+        health.check();
+        assertEquals(Integer.valueOf(200), health.getHttpStatus());
+        assertEquals(StatusEnum.UP.getStatus(), health.getStatus());
+        assertEquals(StatusEnum.UP.getMessage(), health.getMessage());
+        assertEquals(dependencies, health.getDependencies());
+
+        String expectedJson = "{ \"status\": \"UP\", \"message\": \"All dependencies are up\", \"dependencies\": [ { \"name\": \"Success\", \"isCritical\": true, \"status\": \"UP\" }, { \"name\": \"Success\", \"isCritical\": true, \"status\": \"UP\" } ] }";
+        assertEquals(expectedJson, health.asJsonString());
+    }
+
+    @Test
     public void testWithCriticalFailure() {
         List<Dependency> dependencies = Arrays.asList(criticalFailure);
         Health health = new Health(dependencies);

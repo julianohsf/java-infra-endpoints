@@ -58,8 +58,13 @@ public class Health {
           .append("\"message\": \"").append(this.message).append("\", ")
           .append("\"dependencies\": [ ");
 
-        for (Dependency dependency : dependencies) {
-            sb.append(dependency.asJsonString());
+        for (int i = 0; i < dependencies.size(); i++) {
+            sb.append(dependencies.get(i).asJsonString());
+
+            // if not last
+            if (i < (dependencies.size() - 1)) {
+                sb.append(", ");
+            }
         }
 
         return sb.append(" ] }").toString();
