@@ -34,7 +34,7 @@ public class Health {
         this.dependencies.forEach(Dependency::clearStatus);
 
         StatusEnum status = StatusEnum.UP;
-        List<Dependency> failedDependencies = this.dependencies.parallelStream()
+        List<Dependency> failedDependencies = this.dependencies.stream()
                                                                .map(Dependency::checkStatus)
                                                                .filter(dependency -> dependency.getStatus().isFail())
                                                                .collect(Collectors.toList());
