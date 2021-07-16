@@ -1,7 +1,14 @@
-apply plugin: 'java'
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+    }
+}
 
-// making available via jitpack
-apply plugin: 'maven'
+apply plugin: 'com.bmuschko.nexus'
+apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
@@ -44,4 +51,47 @@ jacocoTestCoverageVerification {
             }
         }
     }
+}
+
+modifyPom {
+    project {
+        name 'java-infra-endpoints'
+        description 'Infrastructure endpoints to increase observability in an ecossystem'
+        url 'https://github.com/julianohsf/java-infra-endpoints'
+        inceptionYear '2018'
+
+        scm {
+            url 'https://github.com/julianohsf/java-infra-endpoints'
+            connection 'https://github.com/julianohsf/java-infra-endpoints.git'
+            developerConnection 'git@github.com:julianohsf/java-infra-endpoints.git'
+        }
+
+        licenses {
+            license {
+                name 'The Apache Software License, Version 2.0'
+                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                distribution 'repo'
+            }
+        }
+
+        developers {
+            developer {
+                id 'julianohsf'
+                name 'Juliano Fernandes'
+                email 'me@julianohsf.com'
+            }
+        }
+    }
+}
+
+extraArchive {
+    sources = true
+    tests = true
+    javadoc = true
+}
+
+nexus {
+    sign = true
+    repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+    snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
 }
