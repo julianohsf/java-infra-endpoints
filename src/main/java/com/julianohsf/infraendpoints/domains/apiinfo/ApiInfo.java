@@ -1,4 +1,4 @@
-package com.zoop.infraendpoints.domains.apiinfo;
+package com.julianohsf.infraendpoints.domains.apiinfo;
 
 import java.util.jar.Attributes;
 

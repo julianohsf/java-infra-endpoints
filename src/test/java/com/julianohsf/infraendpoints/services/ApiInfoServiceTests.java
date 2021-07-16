@@ -1,11 +1,9 @@
-package com.zoop.infraendpoints.services;
+package com.julianohsf.infraendpoints.services;
 
-import com.zoop.infraendpoints.domains.apiinfo.ApiInfo;
+import com.julianohsf.infraendpoints.domains.apiinfo.ApiInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-
-import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

@@ -1,7 +1,7 @@
-package com.zoop.infraendpoints.servlets;
+package com.julianohsf.infraendpoints.servlets;
 
-import com.zoop.infraendpoints.domains.health.Health;
-import com.zoop.infraendpoints.services.HealthService;
+import com.julianohsf.infraendpoints.domains.health.Health;
+import com.julianohsf.infraendpoints.services.HealthService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

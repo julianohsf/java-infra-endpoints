@@ -1,7 +1,7 @@
-package com.zoop.infraendpoints.services;
+package com.julianohsf.infraendpoints.services;
 
-import com.zoop.infraendpoints.domains.health.Dependency;
-import com.zoop.infraendpoints.domains.health.Health;
+import com.julianohsf.infraendpoints.domains.health.Dependency;
+import com.julianohsf.infraendpoints.domains.health.Health;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
