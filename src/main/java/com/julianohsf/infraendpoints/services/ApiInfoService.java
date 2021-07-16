@@ -1,6 +1,6 @@
-package com.zoop.infraendpoints.services;
+package com.julianohsf.infraendpoints.services;
 
-import com.zoop.infraendpoints.domains.apiinfo.ApiInfo;
+import com.julianohsf.infraendpoints.domains.apiinfo.ApiInfo;
 
 import java.io.IOException;
 import java.net.URL;

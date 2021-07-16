@@ -1,4 +1,4 @@
-package com.zoop.infraendpoints.domains.health;
+package com.julianohsf.infraendpoints.domains.health;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
