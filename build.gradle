@@ -1,8 +1,5 @@
 apply plugin: 'java'
 
-// making available via jitpack
-apply plugin: 'maven'
-
 sourceCompatibility = 1.8
 
 repositories {
@@ -12,13 +9,10 @@ repositories {
 dependencies {
     compileOnly 'javax.servlet:javax.servlet-api:3.0.1'
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
-jar {
-    baseName = 'infra-endpoints'
-    version = project.version
-}
+// Test Coverage Configs
 
 apply plugin: 'jacoco'
 
@@ -28,10 +22,10 @@ test.finalizedBy jacocoTestReport
 
 jacocoTestReport {
     reports {
-        xml.enabled false
-        csv.enabled false
-        html.enabled true
-        html.destination = new File("${buildDir}/reports/jacoco")
+        html {
+            required = true
+            outputLocation = layout.buildDirectory.dir('jacocoReports')
+        }
     }
 }
 
@@ -43,5 +37,76 @@ jacocoTestCoverageVerification {
                 counter = 'INSTRUCTIONS'
             }
         }
+    }
+}
+
+// Deploy Configs
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        app(MavenPublication) {
+            from components.java
+
+            pom {
+                name = projectName
+                description = 'Infrastructure endpoints to increase observability in an ecossystem'
+                url = 'https://github.com/julianohsf/java-infra-endpoints'
+                inceptionYear = '2018'
+
+                scm {
+                    url = 'https://github.com/julianohsf/java-infra-endpoints'
+                    connection = 'https://github.com/julianohsf/java-infra-endpoints.git'
+                    developerConnection = 'git@github.com:julianohsf/java-infra-endpoints.git'
+                }
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'julianohsf'
+                        name = 'Juliano Fernandes'
+                        email = 'me@julianohsf.com'
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'snapshot'
+            url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+//            credentials(PasswordCredentials)
+        }
+
+        maven {
+            name = 'release'
+            url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials(PasswordCredentials)
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.app
+}
+
+tasks.withType(PublishToMavenRepository) {
+    onlyIf {
+        (repository == publishing.repositories.snapshot && version.endsWith('SNAPSHOT'))
+            ||
+        (repository == publishing.repositories.release && !version.endsWith('SNAPSHOT'))
     }
 }
